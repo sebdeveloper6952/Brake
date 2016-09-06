@@ -4,7 +4,8 @@ using System.Collections;
 
 public class CTileManager : MonoBehaviour
 {
-    public List<GameObject> road;
+    public List<GameObject> leftSide;
+    public List<GameObject> rightSide;
     public List<GameObject> leftSideW;
     public List<GameObject> rightSideW;
 
@@ -12,7 +13,8 @@ public class CTileManager : MonoBehaviour
     private float xOff = 0.64f;
     private float yOff = 0.32f;
     private Vector3 offset;
-    private int roadRendOrder;
+    private int leftRoadOrder;
+    private int rightRoadOrder;
     private int rSideWOrder;
     private int lSideWOrder;
 
@@ -20,15 +22,16 @@ public class CTileManager : MonoBehaviour
 	void Start ()
     {
         offset = new Vector3(xOff, yOff, 0f);
-        roadRendOrder = -8; // right now there are 8 tiles.
-        lSideWOrder = -9;
+        leftRoadOrder = -9; // right now there are 8 tiles.
+        rightRoadOrder = -8;
+        lSideWOrder = -10;
         rSideWOrder = -7;
 	}
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector2.Distance(Camera.main.transform.position, road[road.Count - 1].transform.position);
+        float distance = Vector2.Distance(Camera.main.transform.position, leftSide[leftSide.Count - 1].transform.position);
         //if last tile is offscreen, move it to the front
         if (distance >= 2.75f)
         {
@@ -39,18 +42,28 @@ public class CTileManager : MonoBehaviour
 
     private void AdjustRoadTiles()
     {
-        GameObject tile = road[road.Count - 1]; // save the last tile
-        road.RemoveAt(road.Count - 1); // remove the last tile from list
-        road.Insert(0, tile); // insert the saved tile to the front of the list
-        tile = road[0]; // save the first tile on the list
-        tile.transform.position = road[1].transform.position + offset;
+        GameObject leftTile = leftSide[leftSide.Count - 1]; // save the last tile
+        GameObject rightTile = rightSide[rightSide.Count - 1];
+        //left side
+        leftSide.RemoveAt(leftSide.Count - 1); // remove the last tile from list
+        leftSide.Insert(0, leftTile); // insert the saved tile to the front of the list
+        leftTile = leftSide[0]; // save the first tile on the list
+        leftTile.transform.position = leftSide[1].transform.position + offset;
+        //right side
+        rightSide.RemoveAt(rightSide.Count - 1); // remove the last tile from list
+        rightSide.Insert(0, rightTile); // insert the saved tile to the front of the list
+        rightTile = rightSide[0]; // save the first tile on the list
+        rightTile.transform.position = rightSide[1].transform.position + offset;
 
         // make sure the tiles are rendered in the correct order
-        roadRendOrder = -8;
-        for (int i = 0; i < road.Count; i++)
+        leftRoadOrder = -9;
+        rightRoadOrder = -8;
+        for (int i = 0; i < leftSide.Count; i++)
         {
-            road[i].GetComponent<Renderer>().sortingOrder = roadRendOrder;
-            roadRendOrder++;
+            leftSide[i].GetComponent<Renderer>().sortingOrder = leftRoadOrder;
+            rightSide[i].GetComponent<Renderer>().sortingOrder = rightRoadOrder;
+            leftRoadOrder++;
+            rightRoadOrder++;
         }
     }
 
@@ -67,7 +80,7 @@ public class CTileManager : MonoBehaviour
         lSide.transform.position = leftSideW[1].transform.position + offset;
         rSide.transform.position = rightSideW[1].transform.position + offset;
         // adjust rendering order
-        lSideWOrder = -9;
+        lSideWOrder = -10;
         rSideWOrder = -7;
         for(int i = 0; i < rightSideW.Count; i++)
         {
