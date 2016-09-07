@@ -7,7 +7,7 @@ public class PeopleKilledText : MonoBehaviour
 {
     public Text text;
 
-    private void Update()
+    private void UpdateText()
     {
         text.text = string.Concat("People killed: ", CPeopleManager.peopleKilled.ToString());
     }

@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Car\CCarAudio.cs" />
     <Compile Include="Assets\Scripts\Car\CCarCollision.cs" />
     <Compile Include="Assets\Scripts\Car\CCarMovement.cs" />
+    <Compile Include="Assets\Scripts\Managers\CGameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CPeopleManager.cs" />
     <Compile Include="Assets\Scripts\Map\CTileManager.cs" />
     <Compile Include="Assets\Scripts\Person\CGameObjectDestroyer.cs" />

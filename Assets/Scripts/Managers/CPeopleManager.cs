@@ -8,10 +8,10 @@ public class CPeopleManager : MonoBehaviour
     public float minTime; // minimum time between spawns
     public float maxTime; // maximum time between spawns
     public GameObject car; // the car, used to track its position and spawn persons
-    public static int peopleKilled;
+    public static int peopleKilled; // amount of people runned over
 
     private float timeToSpawn; // time to spawn next person
-    private Vector3 lOffset;
+    private Vector3 lOffset; // offset to the left of the car to spawn persons
     private Vector3 rOffset;
 
     private void Start()
