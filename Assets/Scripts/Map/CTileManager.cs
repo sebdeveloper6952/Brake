@@ -5,15 +5,17 @@ using System.Collections;
 public class CTileManager : MonoBehaviour
 {
     public List<GameObject> leftSide;
+    public List<GameObject> center;
     public List<GameObject> rightSide;
     public List<GameObject> leftSideW;
     public List<GameObject> rightSideW;
 
 
-    private float xOff = 0.64f;
-    private float yOff = 0.32f;
+    private float xOff;
+    private float yOff;
     private Vector3 offset;
     private int leftRoadOrder;
+    private int centerRoadOrder;
     private int rightRoadOrder;
     private int rSideWOrder;
     private int lSideWOrder;
@@ -21,11 +23,14 @@ public class CTileManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        xOff = 0.64f;
+        yOff = 0.3f;
         offset = new Vector3(xOff, yOff, 0f);
         leftRoadOrder = -9; // right now there are 8 tiles.
-        rightRoadOrder = -8;
+        centerRoadOrder = -8;
+        rightRoadOrder = -7;
         lSideWOrder = -10;
-        rSideWOrder = -7;
+        rSideWOrder = -6;
 	}
 
     // Update is called once per frame
@@ -44,11 +49,17 @@ public class CTileManager : MonoBehaviour
     {
         GameObject leftTile = leftSide[leftSide.Count - 1]; // save the last tile
         GameObject rightTile = rightSide[rightSide.Count - 1];
+        GameObject centerTile = center[center.Count - 1];
         //left side
         leftSide.RemoveAt(leftSide.Count - 1); // remove the last tile from list
         leftSide.Insert(0, leftTile); // insert the saved tile to the front of the list
         leftTile = leftSide[0]; // save the first tile on the list
         leftTile.transform.position = leftSide[1].transform.position + offset;
+        //center
+        center.RemoveAt(center.Count - 1);
+        center.Insert(0, centerTile);
+        centerTile = center[0];
+        centerTile.transform.position = center[1].transform.position + offset;
         //right side
         rightSide.RemoveAt(rightSide.Count - 1); // remove the last tile from list
         rightSide.Insert(0, rightTile); // insert the saved tile to the front of the list
@@ -57,12 +68,15 @@ public class CTileManager : MonoBehaviour
 
         // make sure the tiles are rendered in the correct order
         leftRoadOrder = -9;
-        rightRoadOrder = -8;
+        centerRoadOrder = -8;
+        rightRoadOrder = -7;
         for (int i = 0; i < leftSide.Count; i++)
         {
             leftSide[i].GetComponent<Renderer>().sortingOrder = leftRoadOrder;
+            center[i].GetComponent<Renderer>().sortingOrder = centerRoadOrder;
             rightSide[i].GetComponent<Renderer>().sortingOrder = rightRoadOrder;
             leftRoadOrder++;
+            centerRoadOrder++;
             rightRoadOrder++;
         }
     }
@@ -81,7 +95,7 @@ public class CTileManager : MonoBehaviour
         rSide.transform.position = rightSideW[1].transform.position + offset;
         // adjust rendering order
         lSideWOrder = -10;
-        rSideWOrder = -7;
+        rSideWOrder = -6;
         for(int i = 0; i < rightSideW.Count; i++)
         {
             leftSideW[i].GetComponent<Renderer>().sortingOrder = lSideWOrder;

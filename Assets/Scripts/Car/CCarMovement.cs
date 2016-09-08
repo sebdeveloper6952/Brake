@@ -5,8 +5,8 @@ public class CCarMovement : MonoBehaviour
 {
     public static CCarMovement instance;
 
-    private float xMove = 0.64f;
-    private float yMove = 0.32f;
+    private float xMove;
+    private float yMove;
     private float accelX; // accelerometer x coordinate, used to brake
     private float accelY; // accelerometer y coordinate, used to turn
     public Rigidbody2D rb;
@@ -17,6 +17,8 @@ public class CCarMovement : MonoBehaviour
 	void Start ()
     {
         instance = this;
+        xMove = 0.64f;
+        yMove = 0.3f;
         rb = GetComponent<Rigidbody2D>();
         force = new Vector2(xMove, yMove);
 	}
@@ -54,12 +56,12 @@ public class CCarMovement : MonoBehaviour
 
     private void Turn()
     {
-        if(accelY > -0.3f)
+        if(accelY > -0.4f)
         {
             // turn left
             transform.Translate(new Vector3(0f, Time.deltaTime, 0f));
         }
-        if(accelY < -0.7f)
+        if(accelY < -0.6f)
         {
             // turn right
             transform.Translate(new Vector3(0f, -Time.deltaTime * 1.5f, 0f));
