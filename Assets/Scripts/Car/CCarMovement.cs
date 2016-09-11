@@ -13,10 +13,15 @@ public class CCarMovement : MonoBehaviour
     private Vector2 force;
     private bool braking;
 
+
+    // called before start
+    void Awake()
+    {
+        instance = this;
+    }
 	// Use this for initialization
 	void Start ()
     {
-        instance = this;
         xMove = 0.64f;
         yMove = 0.3f;
         rb = GetComponent<Rigidbody2D>();
@@ -33,8 +38,9 @@ public class CCarMovement : MonoBehaviour
         {
             Turn();
         }
-	}
+    }
 
+    // called every physics tick
     private void FixedUpdate()
     {
         Move();
@@ -56,12 +62,12 @@ public class CCarMovement : MonoBehaviour
 
     private void Turn()
     {
-        if(accelY > -0.4f)
+        if (accelY > -0.5f && transform.position.y < CTileManager.maxL)
         {
             // turn left
             transform.Translate(new Vector3(0f, Time.deltaTime, 0f));
         }
-        if(accelY < -0.6f)
+        else if (accelY < -0.7f && transform.position.y > CTileManager.maxR)
         {
             // turn right
             transform.Translate(new Vector3(0f, -Time.deltaTime * 1.5f, 0f));

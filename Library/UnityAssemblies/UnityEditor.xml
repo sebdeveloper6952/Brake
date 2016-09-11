@@ -8456,6 +8456,19 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       <param name="foldout">The shown foldout state.</param>
       <param name="content">The label to show.</param>
       <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
+      <returns>
+        <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.EditorGUILayout.Foldout(System.Boolean,System.String,System.Boolean,UnityEngine.GUIStyle)">
+      <summary>
+        <para>Make a label with a foldout arrow to the left of it.</para>
+      </summary>
+      <param name="foldout">The shown foldout state.</param>
+      <param name="content">The label to show.</param>
+      <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
       <returns>
         <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
       </returns>
@@ -8467,6 +8480,19 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       <param name="foldout">The shown foldout state.</param>
       <param name="content">The label to show.</param>
       <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
+      <returns>
+        <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.EditorGUILayout.Foldout(System.Boolean,UnityEngine.GUIContent,System.Boolean,UnityEngine.GUIStyle)">
+      <summary>
+        <para>Make a label with a foldout arrow to the left of it.</para>
+      </summary>
+      <param name="foldout">The shown foldout state.</param>
+      <param name="content">The label to show.</param>
+      <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
       <returns>
         <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
       </returns>
@@ -8478,6 +8504,7 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       <param name="foldout">The shown foldout state.</param>
       <param name="content">The label to show.</param>
       <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
       <returns>
         <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
       </returns>
@@ -8489,6 +8516,7 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       <param name="foldout">The shown foldout state.</param>
       <param name="content">The label to show.</param>
       <param name="style">Optional GUIStyle.</param>
+      <param name="toggleOnLabelClick">Whether to toggle the foldout state when the label is clicked.</param>
       <returns>
         <para>The foldout state selected by the user. If true, you should render sub-objects.</para>
       </returns>

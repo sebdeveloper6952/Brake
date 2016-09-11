@@ -7860,7 +7860,7 @@ The actual rendering path might be different from the user-specified renderingPa
     </member>
     <member name="P:UnityEngine.Camera.nonJitteredProjectionMatrix">
       <summary>
-        <para>Get or set the raw projection matrix with no camera offset (no jittering). </para>
+        <para>Get or set the raw projection matrix with no camera offset (no jittering).</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Camera.onPostRender">
@@ -7967,6 +7967,11 @@ The values passed to stereoTargetEye are found in the StereoTargetEyeMask enum. 
     <member name="P:UnityEngine.Camera.transparencySortMode">
       <summary>
         <para>Transparent object sorting mode.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Camera.useJitteredProjectionMatrixForTransparentRendering">
+      <summary>
+        <para>Should the jittered matrix be used for transparency rendering?</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Camera.useOcclusionCulling">
@@ -27780,6 +27785,26 @@ Use false when you want to use the existing bounding box and reduce the CPU cost
         <para>Base class for AnimationClips and BlendTrees.</para>
       </summary>
     </member>
+    <member name="T:UnityEngine.MotionVectorGenerationMode">
+      <summary>
+        <para>The type of motion vectors that should be generated.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.MotionVectorGenerationMode.Camera">
+      <summary>
+        <para>Use only camera movement to track motion.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.MotionVectorGenerationMode.ForceNoMotion">
+      <summary>
+        <para>Do not track motion. Motion vectors will be 0.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.MotionVectorGenerationMode.Object">
+      <summary>
+        <para>Use a specific pass (if required) to track motion.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.MovieTexture">
       <summary>
         <para>Movie Textures are textures onto which movies are played back.</para>
@@ -31501,7 +31526,7 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
     </member>
     <member name="P:UnityEngine.ParticleSystem.useAutoRandomSeed">
       <summary>
-        <para>Set to false to support providing your own random seed for the Particle System.</para>
+        <para>Controls whether the Particle System uses an automatically-generated random number to seed the random number generator.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.ParticleSystem.velocityOverLifetime">
@@ -32570,7 +32595,7 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
         <para>Low values create soft, smooth noise, and high values create rapidly changing noise.</para>
       </summary>
     </member>
-    <member name="P:UnityEngine.ParticleSystem.NoiseModule.numOctaves">
+    <member name="P:UnityEngine.ParticleSystem.NoiseModule.octaveCount">
       <summary>
         <para>Layers of noise that combine to produce final noise.</para>
       </summary>
@@ -33181,7 +33206,7 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
         <para>Enable/disable the Sub Emitters module.</para>
       </summary>
     </member>
-    <member name="P:UnityEngine.ParticleSystem.SubEmittersModule.numSubEmitters">
+    <member name="P:UnityEngine.ParticleSystem.SubEmittersModule.subEmittersCount">
       <summary>
         <para>The total number of sub-emitters.</para>
       </summary>
@@ -33338,6 +33363,11 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
         <para>The gradient controlling the trail colors over the length of the trail.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.ParticleSystem.TrailModule.dieWithParticles">
+      <summary>
+        <para>If enabled, Trails will disappear immediately when their owning particle dies. Otherwise, the trail will persist until all its points have naturally expired, based on its lifetime.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.ParticleSystem.TrailModule.enabled">
       <summary>
         <para>Enable/disable the Trail module.</para>
@@ -33386,6 +33416,11 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
     <member name="P:UnityEngine.ParticleSystem.TrailModule.widthOverTrailMultiplier">
       <summary>
         <para>Change the width multiplier.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.ParticleSystem.TrailModule.worldSpace">
+      <summary>
+        <para>Drop new trail points in world space, regardless of Particle System Simulation Space.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.ParticleSystem.TriggerModule">
@@ -38056,6 +38091,84 @@ See Also: ReflectionProbeTimeSlicingMode.</para>
         <para>The world-space position that is currently trying to be maintained.</para>
       </summary>
     </member>
+    <member name="T:UnityEngine.RemoteSettings">
+      <summary>
+        <para>Accesses remote settings (common for all game instances).</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetBool(System.String)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetBool(System.String,System.Boolean)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetFloat(System.String)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetFloat(System.String,System.Single)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetInt(System.String)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetInt(System.String,System.Int32)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetString(System.String)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.GetString(System.String,System.String)">
+      <summary>
+        <para>Returns the value corresponding to key in the remote settings if it exists.</para>
+      </summary>
+      <param name="key"></param>
+      <param name="defaultValue"></param>
+    </member>
+    <member name="M:UnityEngine.RemoteSettings.HasKey(System.String)">
+      <summary>
+        <para>Returns true if key exists in the remote settings.</para>
+      </summary>
+      <param name="key"></param>
+    </member>
+    <member name="?:UnityEngine.RemoteSettings.Updated(UnityEngine.RemoteSettings/UpdatedEventHandler)">
+      <summary>
+        <para>This event occurs when a new RemoteSetting is fetched and successfully parsed from the server.</para>
+      </summary>
+      <param name="value"></param>
+    </member>
+    <member name="T:UnityEngine.RemoteSettings.UpdatedEventHandler">
+      <summary>
+        <para>This event occurs when a new RemoteSetting is fetched and successfully parsed from the server.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.RenderBuffer">
       <summary>
         <para>Color or depth buffer part of a RenderTexture.</para>
@@ -38126,9 +38239,9 @@ See Also: ReflectionProbeTimeSlicingMode.</para>
         <para>Returns all the instantiated materials of this object.</para>
       </summary>
     </member>
-    <member name="P:UnityEngine.Renderer.motionVectors">
+    <member name="P:UnityEngine.Renderer.motionVectorGenerationMode">
       <summary>
-        <para>Specifies whether this renderer has a per-object motion vector pass.</para>
+        <para>Specifies the mode for motion vector rendering.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Renderer.probeAnchor">

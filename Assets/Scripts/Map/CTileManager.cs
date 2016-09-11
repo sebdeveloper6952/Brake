@@ -9,7 +9,8 @@ public class CTileManager : MonoBehaviour
     public List<GameObject> rightSide;
     public List<GameObject> leftSideW;
     public List<GameObject> rightSideW;
-
+    public static float maxL;
+    public static float maxR;
 
     private float xOff;
     private float yOff;
@@ -38,11 +39,14 @@ public class CTileManager : MonoBehaviour
     {
         float distance = Vector2.Distance(Camera.main.transform.position, leftSide[leftSide.Count - 1].transform.position);
         //if last tile is offscreen, move it to the front
-        if (distance >= 2.75f)
+        if (distance >= 4.5f)
         {
             AdjustRoadTiles();
             AdjustSideWalks();
         }
+        maxL = leftSideW[4].transform.position.y;
+        maxR = rightSideW[3].transform.position.y;
+        print(maxL + " , " + maxR);
     }
 
     private void AdjustRoadTiles()
