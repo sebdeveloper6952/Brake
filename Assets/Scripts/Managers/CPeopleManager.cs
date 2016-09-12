@@ -11,14 +11,15 @@ public class CPeopleManager : MonoBehaviour
     public static int peopleKilled; // amount of people runned over
 
     private float timeToSpawn; // time to spawn next person
-    private Vector3 lOffset; // offset to the left of the car to spawn persons
-    private Vector3 rOffset;
+    private Vector3 offset; // offset to the left of the car to spawn persons
+    private Vector3 spawnPos;
+    private CTileManager tileManager;
 
     private void Start()
     {
+        tileManager = CTileManager.instance;
         timeToSpawn = Random.Range(minTime, maxTime);
-        lOffset = new Vector3(1.28f, 1.4f, 0f);
-        rOffset = new Vector3(2.56f, 0.76f, 0f);
+        offset = new Vector3(1.28f, 0.64f, 0f);
         peopleKilled = 0;
     }
 
@@ -38,16 +39,17 @@ public class CPeopleManager : MonoBehaviour
     {
         // choose a random direction and spawn point
         float direction = Random.Range(-1, 2);
-        Vector3 spawnPos;
         if(direction > 0)
         {
             direction = 1;
-            spawnPos = car.transform.position + lOffset;
+            //spawnPos = car.transform.position + lOffset;
+            spawnPos = tileManager.leftSideW[0].transform.position + offset;
         }
         else
         {
             direction = -1;
-            spawnPos = car.transform.position + rOffset;
+            //spawnPos = car.transform.position + rOffset;
+            spawnPos = tileManager.rightSideW[0].transform.position + offset;
         }
         for(int i = 0; i < people.Count; i++)
         {

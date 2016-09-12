@@ -11,6 +11,7 @@ public class CTileManager : MonoBehaviour
     public List<GameObject> rightSideW;
     public static float maxL;
     public static float maxR;
+    public static CTileManager instance;
 
     private float xOff;
     private float yOff;
@@ -20,6 +21,11 @@ public class CTileManager : MonoBehaviour
     private int rightRoadOrder;
     private int rSideWOrder;
     private int lSideWOrder;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
 	// Use this for initialization
 	void Start ()
@@ -44,9 +50,8 @@ public class CTileManager : MonoBehaviour
             AdjustRoadTiles();
             AdjustSideWalks();
         }
-        maxL = leftSideW[4].transform.position.y;
+        maxL = leftSideW[4].transform.position.y; // right now this is the way to make the car stay in a range of sideways movement
         maxR = rightSideW[3].transform.position.y;
-        print(maxL + " , " + maxR);
     }
 
     private void AdjustRoadTiles()
@@ -65,16 +70,16 @@ public class CTileManager : MonoBehaviour
         centerTile = center[0];
         centerTile.transform.position = center[1].transform.position + offset;
         //right side
-        rightSide.RemoveAt(rightSide.Count - 1); // remove the last tile from list
-        rightSide.Insert(0, rightTile); // insert the saved tile to the front of the list
-        rightTile = rightSide[0]; // save the first tile on the list
+        rightSide.RemoveAt(rightSide.Count - 1);
+        rightSide.Insert(0, rightTile);
+        rightTile = rightSide[0];
         rightTile.transform.position = rightSide[1].transform.position + offset;
 
         // make sure the tiles are rendered in the correct order
         leftRoadOrder = -9;
         centerRoadOrder = -8;
         rightRoadOrder = -7;
-        for (int i = 0; i < leftSide.Count; i++)
+        for (int i = 0; i < leftSide.Count; i++) // apply the rendering order to each tile
         {
             leftSide[i].GetComponent<Renderer>().sortingOrder = leftRoadOrder;
             center[i].GetComponent<Renderer>().sortingOrder = centerRoadOrder;

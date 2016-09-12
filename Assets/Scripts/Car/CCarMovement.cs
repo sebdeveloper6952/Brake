@@ -4,14 +4,19 @@ using System.Collections;
 public class CCarMovement : MonoBehaviour
 {
     public static CCarMovement instance;
+    public float distanceCovered;
+    public float fuelLevel;
 
     private float xMove;
     private float yMove;
     private float accelX; // accelerometer x coordinate, used to brake
     private float accelY; // accelerometer y coordinate, used to turn
+    private float maxSpeed;
     public Rigidbody2D rb;
     private Vector2 force;
     private bool braking;
+    private const float maxFuel = 100f;
+    private const float minFuel = 0f;
 
 
     // called before start
@@ -22,9 +27,12 @@ public class CCarMovement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        rb = GetComponent<Rigidbody2D>();
         xMove = 0.64f;
         yMove = 0.3f;
-        rb = GetComponent<Rigidbody2D>();
+        maxSpeed = 2f;
+        distanceCovered = 0f;
+        fuelLevel = maxFuel;
         force = new Vector2(xMove, yMove);
 	}
 	
@@ -38,6 +46,8 @@ public class CCarMovement : MonoBehaviour
         {
             Turn();
         }
+        Distance();
+        Fuel();
     }
 
     // called every physics tick
@@ -53,7 +63,7 @@ public class CCarMovement : MonoBehaviour
             accelX -= 4f;
             rb.AddForce(force * accelX);
         }
-        else if(!braking && rb.velocity.magnitude <2f)
+        else if(!braking && rb.velocity.magnitude < maxSpeed)
         {
             accelX += 2f;
             rb.AddForce(force * accelX);
@@ -72,5 +82,26 @@ public class CCarMovement : MonoBehaviour
             // turn right
             transform.Translate(new Vector3(0f, -Time.deltaTime * 1.5f, 0f));
         }
+    }
+
+    private void Distance()
+    {
+        if(rb.velocity.magnitude > 0.1f)
+        {
+            distanceCovered += rb.velocity.magnitude / 50.0f;
+        }
+    }
+
+    private void Fuel()
+    {
+        if(rb.velocity.magnitude > 0.1f)
+        {
+            fuelLevel -= rb.velocity.magnitude / 100.0f;
+        }
+    }
+
+    private void RefillFuelTank()
+    {
+        fuelLevel = maxFuel;
     }
 }

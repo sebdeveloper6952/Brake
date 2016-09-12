@@ -85,11 +85,16 @@
     <Compile Include="Assets\Scripts\Car\CCarAudio.cs" />
     <Compile Include="Assets\Scripts\Car\CCarCollision.cs" />
     <Compile Include="Assets\Scripts\Car\CCarMovement.cs" />
+    <Compile Include="Assets\Scripts\Fuel\CFuelPickup.cs" />
+    <Compile Include="Assets\Scripts\Fuel\CFuelSpawner.cs" />
     <Compile Include="Assets\Scripts\Managers\CGameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CPeopleManager.cs" />
     <Compile Include="Assets\Scripts\Map\CTileManager.cs" />
     <Compile Include="Assets\Scripts\Person\CGameObjectDestroyer.cs" />
     <Compile Include="Assets\Scripts\Person\CPerson.cs" />
+    <Compile Include="Assets\Scripts\UI\CDistance_Fuel.cs" />
+    <Compile Include="Assets\Scripts\UI\CMainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\CScoreScreen.cs" />
     <Compile Include="Assets\Scripts\UI\PeopleKilledText.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
