@@ -5,13 +5,19 @@ using UnityEngine.UI;
 
 public class CCarCollision : MonoBehaviour
 {
-    public Text peopleText;
+    public Text animalText;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // if other is a person, it will pick up this message
-        other.SendMessage("RunnedOver", SendMessageOptions.DontRequireReceiver);
-        // if other is a fuel tank, pick up fuel tank
-        peopleText.SendMessage("UpdateText", SendMessageOptions.DontRequireReceiver);
+        // if other is an animal, it will pick up this message
+        if (other.CompareTag("Animal"))
+        {
+            other.SendMessage("RunnedOver", SendMessageOptions.DontRequireReceiver);
+            animalText.SendMessage("UpdateText", SendMessageOptions.DontRequireReceiver);
+        }
+        else
+        {
+            other.SendMessage("RefillFuelTank", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }

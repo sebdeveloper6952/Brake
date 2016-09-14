@@ -30,7 +30,7 @@ public class CGameManager : MonoBehaviour
     private void GoodGuyMode()
     {
         // check if player has runned over the max amount of people
-        if(CPeopleManager.peopleKilled >= maxRunOverPeople || car.fuelLevel <= 0)
+        if(CAnimalsManager.animalsKilled >= maxRunOverPeople || car.fuelLevel <= 0)
         {
             /* player lost
                calculate score and save it in player prefs, then load the score scene
@@ -51,9 +51,9 @@ public class CGameManager : MonoBehaviour
                calculate score and save it in player prefs, then load the score scene 
                the score in bad guy mode is the number of people run over multiplied by distance covered */
             float distance = car.distanceCovered;
-            int peopleKilled = CPeopleManager.peopleKilled;
+            int animalsKilled = CAnimalsManager.animalsKilled;
             PlayerPrefs.SetFloat("BadGuyScore", distance);
-            PlayerPrefs.SetInt("PeopleKilled", peopleKilled);
+            PlayerPrefs.SetInt("AnimalsKilled", animalsKilled);
             PlayerPrefs.Save();
             SceneManager.LoadScene("ScoreScene");
         }

@@ -88,7 +88,7 @@ public class CCarMovement : MonoBehaviour
     {
         if(rb.velocity.magnitude > 0.1f)
         {
-            distanceCovered += rb.velocity.magnitude / 50.0f;
+            distanceCovered += rb.velocity.magnitude / 25f;
         }
     }
 
@@ -96,12 +96,7 @@ public class CCarMovement : MonoBehaviour
     {
         if(rb.velocity.magnitude > 0.1f)
         {
-            fuelLevel -= rb.velocity.magnitude / 100.0f;
+            fuelLevel -= rb.velocity.magnitude / 50.0f;
         }
-    }
-
-    private void RefillFuelTank()
-    {
-        fuelLevel = maxFuel;
     }
 }

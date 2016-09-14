@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CFuelPickup : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    private void RefillFuelTank()
     {
-        other.SendMessage("RefillFuelTank", SendMessageOptions.DontRequireReceiver);
+        CCarMovement.instance.fuelLevel = 100f;
+        gameObject.SetActive(false);
     }
 }

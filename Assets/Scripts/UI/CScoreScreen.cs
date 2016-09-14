@@ -15,7 +15,7 @@ public class CScoreScreen : MonoBehaviour
     private int playMode;
     private float score;
     private float highScore;
-    private int peopleKilled;
+    private int animalsKilled;
     private float distance;
 
     void Start()
@@ -64,9 +64,9 @@ public class CScoreScreen : MonoBehaviour
         {
             // in bad guy mode, the score is the number of people ran over multiplied by the distance
             distance = PlayerPrefs.GetFloat("BadGuyScore");
-            peopleKilled = PlayerPrefs.GetInt("PeopleKilled");
+            animalsKilled = PlayerPrefs.GetInt("AnimalsKilled");
             highScore = PlayerPrefs.GetFloat("BadGuyHighScore");
-            score = distance * peopleKilled;
+            score = distance * animalsKilled;
             // check if it is a new high score
             if(score > highScore)
             {
@@ -78,7 +78,7 @@ public class CScoreScreen : MonoBehaviour
             {
                 highScoreText.text = "The high score is: " + highScore.ToString("F2");
             }
-            scoreText.text = "You killed " + peopleKilled + " people, and traveled " + distance + " meters. Your score is: " + score.ToString("F2");
+            scoreText.text = "You killed " + animalsKilled + " animals, and traveled " + distance.ToString("F2") + " meters. Your score is: " + score.ToString("F2");
         }
     }
 }
