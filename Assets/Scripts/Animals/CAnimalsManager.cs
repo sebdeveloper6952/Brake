@@ -35,18 +35,21 @@ public class CAnimalsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the direction for the new animal, and spawns it.
+    /// </summary>
     private void SpawnAnimal()
     {
         // choose a random direction and spawn point
         float direction = Random.Range(-1, 2);
         if (direction > 0)
         {
-            direction = 1; // la direccion de movimiento es hacia abajo
+            direction = 1; // movement direction is downwards
             spawnPos = tileManager.leftSideW[0].transform.position + offset;
         }
         else
         {
-            direction = -1; // la direccion de movimiento es hacia arriba
+            direction = -1; // movement direction is upwards
             spawnPos = tileManager.rightSideW[0].transform.position + offset;
         }
         for (int i = 0; i < animalsList.Count; i++)
